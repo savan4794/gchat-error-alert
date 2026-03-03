@@ -11,10 +11,6 @@ class GChatLogHandler extends AbstractProcessingHandler
 {
     protected function write($record): void
     {
-         // Ignore CLI / Artisan / Queue errors
-       if (str_contains($record, 'Route::getTable')) {
-            return;
-        }
         if (!config('gchat-alert.enabled')) {
             return;
         }
@@ -33,7 +29,10 @@ class GChatLogHandler extends AbstractProcessingHandler
                 $level = $record['level_name'];
                 $message = $record['message'];
             }
-
+            // Ignore CLI / Artisan / Queue errors
+            if (str_contains($record, 'Route::getTable')) {
+                return;
+            }
             Http::post($webhook, [
                 'text' =>
                     "🚨 ".config('app.name')." Error Alert\n\n" .
