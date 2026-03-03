@@ -30,7 +30,7 @@ class GChatLogHandler extends AbstractProcessingHandler
                 $message = $record['message'];
             }
             // Ignore CLI / Artisan / Queue errors
-            if (str_contains($record, 'Route::getTable')) {
+            if (str_contains($message, 'Route::getTable')) {
                 return;
             }
             Http::post($webhook, [
