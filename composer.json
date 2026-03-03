@@ -1,0 +1,23 @@
+{
+    "name": "savan/gchat-error-alert",
+    "description": "Google Chat error alert package for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Savan\\GchatErrorAlert\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Savan\\GchatErrorAlert\\GChatAlertServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^7.4|^8.0|^8.1|^8.2|^8.3",
+        "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0"
+    },
+    "minimum-stability": "stable"
+}
