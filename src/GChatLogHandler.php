@@ -11,6 +11,10 @@ class GChatLogHandler extends AbstractProcessingHandler
 {
     protected function write($record): void
     {
+         // Ignore CLI / Artisan / Queue errors
+       if (str_contains($record, 'Route::getTable')) {
+            return;
+        }
         if (!config('gchat-alert.enabled')) {
             return;
         }
@@ -22,7 +26,6 @@ class GChatLogHandler extends AbstractProcessingHandler
         }
 
         try {
-            Log::info($record);
             if ($record instanceof LogRecord) {
                 $level = $record->level->getName();
                 $message = $record->message;
